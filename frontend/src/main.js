@@ -1,22 +1,12 @@
-// The Vue build version to load with the `import` command
-// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
+/* ============
+ * Main File
+ * ============
+ *
+ * This will initialize the application.
+ */
 import Vue from 'vue'
-import BootstrapVue from 'bootstrap-vue'
-import app from './App'
-// import router from './router'
-
-Vue.use(BootstrapVue)
-
+import app from './app'
 /* eslint-disable no-new */
-// new Vue({
-//   el: '#app',
-//   router,
-//   template: '<App/>',
-//   components: {
-//     App
-//   }
-// })
-
 require('./bootstrap')
 
 new Vue(app).$mount('#app')

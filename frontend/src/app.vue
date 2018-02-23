@@ -3,9 +3,22 @@
 </template>
 
 <script>
-export default {
-  name: 'app'
-}
+  import store from '@/store'
+  import { router } from './bootstrap'
+
+  export default {
+    name: 'app',
+
+    /**
+     * The Vuex store.
+     */
+    store,
+
+    /**
+     * The router
+     */
+    router
+  }
 </script>
 
 <style lang="scss">
@@ -19,8 +32,6 @@ export default {
   @import '~simple-line-icons/css/simple-line-icons.css';
   /* Import Bootstrap Vue Styles */
   @import '~bootstrap-vue/dist/bootstrap-vue.css';
-</style>
-<style lang="scss">
   // Import Main styles for this application
   @import './scss/style';
 </style>

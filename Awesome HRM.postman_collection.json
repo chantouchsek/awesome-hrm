@@ -1,0 +1,86 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Awesome HRM",
+		"_postman_id": "18cef92d-6c0e-e022-7931-51b99644c0c0",
+		"description": "## For API Router",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authorization",
+			"description": "For allowing user login to sytem",
+			"item": [
+				{
+					"name": "/oauth/token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"postman.setEnvironmentVariable(\"token\", JSON.parse(responseBody).access_token);"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{host}}/oauth/token",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"grant_type\" : \"password\",\n  \"username\" : \"{{username}}\",\n  \"password\" : \"{{password}}\",\n  \"client_id\" : {{client_id}},\n  \"client_secret\" : \"{{client_secret}}\"\n}"
+						},
+						"description": "User authorization"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"description": "Get all users",
+			"item": [
+				{
+					"name": "/api/user",
+					"request": {
+						"url": "http://{{host}}/api/user",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/vnd.api+json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": "Get all user"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
