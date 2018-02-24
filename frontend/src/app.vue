@@ -15,7 +15,7 @@
     store,
 
     /**
-     * The router
+     * The router.
      */
     router
   }

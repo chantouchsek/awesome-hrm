@@ -11,7 +11,7 @@ import Full from '@/containers/Full'
 // Views
 import Dashboard from '@/views/Dashboard'
 
-import Colors from '@/views/theme/Colors'
+// import Colors from '@/views/theme/Colors'
 import Typography from '@/views/theme/Typography'
 
 import Charts from '@/views/Charts'
@@ -82,7 +82,8 @@ export default [
           {
             path: 'colors',
             name: 'Colors',
-            component: Colors
+            // component: Colors,
+            component: resolve => require(['@/views/theme/Colors'], resolve)
           },
           {
             path: 'typography',

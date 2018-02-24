@@ -70,7 +70,7 @@ store.dispatch('auth/check')
 Vue.use(VueRouter)
 
 export const router = new VueRouter({
-  mode: 'history',
+  mode: 'hash',
   linkActiveClass: 'open active',
   scrollBehavior (to, from, savedPosition) {
     return new Promise((resolve, reject) => {
