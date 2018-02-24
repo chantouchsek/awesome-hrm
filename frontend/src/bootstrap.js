@@ -43,8 +43,6 @@ import BootstrapVue from 'bootstrap-vue'
 import { sync } from 'vuex-router-sync'
 import store from '@/store'
 
-store.dispatch('auth/check')
-
 Vue.config.debug = process.env.NODE_ENV !== 'production'
 
 Axios.defaults.baseURL = process.env.API_LOCATION
@@ -83,6 +81,8 @@ export const router = new VueRouter({
   },
   routes
 })
+
+store.dispatch('auth/check')
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some(m => m.meta.auth) && !store.state.auth.authenticated) {

@@ -3,9 +3,9 @@ var prodEnv = require('./prod.env')
 
 module.exports = merge(prodEnv, {
   NODE_ENV: '"development"',
-  API_LOCATION: '"http://127.0.0.1:8000"',
+  API_LOCATION: '"http://api.awesome-hrm.test"',
   API_CLIENT_ID: '"2"',
-  API_CLIENT_SECRET: '"CqAwmoMAHjU8JUzXa55vmmWY8JXlKUGb1LF0Uv7P"',
+  API_CLIENT_SECRET: '"dBDtGNn1krLqmtzRNYJt9CndchrazRFChTGcvZgH"',
   BROADCAST_AUTH_ENDPOINT: '""',
   PUSHER_KEY: '""',
   PUSHER_CLUSTER: '"ap1"'
