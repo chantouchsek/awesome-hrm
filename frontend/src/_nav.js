@@ -11,6 +11,25 @@ export default {
     },
     {
       title: true,
+      name: 'Settings',
+      class: '',
+      wrapper: {
+        element: '',
+        attributes: {}
+      }
+    },
+    {
+      name: 'Permissions',
+      url: '/setting/permissions',
+      icon: 'icon-wrench'
+    },
+    {
+      name: 'Users',
+      url: '/setting/users',
+      icon: 'icon-user'
+    },
+    {
+      title: true,
       name: 'Theme',
       class: '',
       wrapper: {

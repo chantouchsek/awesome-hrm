@@ -21,6 +21,10 @@ Route::prefix('users')->as('users.')->group(function () { // ->namespace('Users'
     Route::get('', 'UsersController@index')->name('index');
 });
 
+Route::prefix('permissions')->as('permissions.')->group(function () { // ->namespace('Users')->middleware(['auth:api'])
+    Route::get('', 'PermissionsController@index')->name('index');
+});
+
 Route::prefix('departments')->as('departments.')->group(function () { // ->namespace('Users')->middleware(['auth:api'])
     Route::get('', 'DepartmentsController@index')->name('index');
 });

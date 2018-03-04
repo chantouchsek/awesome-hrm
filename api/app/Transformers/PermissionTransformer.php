@@ -2,7 +2,7 @@
 
 namespace App\Transformers;
 
-class UserTransformer extends BaseTransformer
+class PermissionTransformer extends BaseTransformer
 {
 
     /**
@@ -17,7 +17,6 @@ class UserTransformer extends BaseTransformer
         return [
             'id' => (int)$item->id,
             'name' => (string)$item->name,
-            'email' => (string)$item->email,
             'registered_date' => $item->created_at->toDateString(),
         ];
     }
