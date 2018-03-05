@@ -11,7 +11,7 @@ import Full from '@/containers/Full'
 // Views
 import Dashboard from '@/views/Dashboard'
 
-// import Colors from '@/views/theme/Colors'
+import Colors from '@/views/theme/Colors'
 import Typography from '@/views/theme/Typography'
 
 import Charts from '@/views/Charts'
@@ -56,18 +56,53 @@ import Page500 from '@/views/pages/Page500'
 import Login from '@/views/login/Login'
 import Register from '@/views/pages/Register'
 
+// Views - Settings
+import Permissions from '@/views/settings/permissions/Index'
+import PermissionCreate from '@/views/settings/permissions/Create'
+
+import Users from '@/views/settings/users/Index'
+
 export default [
   {
     path: '/',
     redirect: '/dashboard',
     name: 'Home',
     component: Full,
-    meta: { auth: true },
+    meta: {auth: true},
     children: [
       {
         path: 'dashboard',
         name: 'Dashboard',
         component: Dashboard
+      },
+      {
+        path: 'setting',
+        redirect: '/setting/permissions',
+        name: 'Settings',
+        component: {
+          render (c) {
+            return c('router-view')
+          }
+        },
+        children: [
+          {
+            path: 'permissions',
+            name: 'Permissions',
+            component: Permissions,
+            children: [
+              {
+                path: 'create',
+                name: 'Create',
+                component: PermissionCreate
+              }
+            ]
+          },
+          {
+            path: 'users',
+            name: 'Users',
+            component: Users
+          }
+        ]
       },
       {
         path: 'theme',
@@ -82,8 +117,7 @@ export default [
           {
             path: 'colors',
             name: 'Colors',
-            // component: Colors,
-            component: resolve => require(['@/views/theme/Colors'], resolve)
+            component: Colors
           },
           {
             path: 'typography',

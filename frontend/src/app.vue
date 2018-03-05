@@ -4,7 +4,7 @@
 
 <script>
   import store from '@/store'
-  import { router } from './bootstrap'
+  import {router} from './bootstrap'
 
   export default {
     name: 'app',
@@ -17,7 +17,14 @@
     /**
      * The router.
      */
-    router
+    router,
+    mounted () {
+      // this.$store.watch((state) => {
+      //   if (state.auth.authenticated) {
+      //     store.dispatch('user/all')
+      //   }
+      // })
+    }
   }
 </script>
 
