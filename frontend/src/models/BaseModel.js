@@ -1,17 +1,16 @@
-/* =============
-* Base Model
-* =============
-*
-* The BaseModel for the rest of the models
-*/
+/* ============
+ * Base Model
+ * ============
+ *
+ * The base for the rest of the models.
+ */
 
 class BaseModel {
   /**
-   * The constructor for base model
+   * The constructor for the base model.
    *
-   * @param {Object} data Teh properties which are publicly accessible
+   * @param {Object} data The properties which are publicly accessible.
    */
-
   constructor (data) {
     Object.keys(data).forEach((key) => {
       this[key] = data[key]

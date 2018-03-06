@@ -84,11 +84,11 @@ class BaseProxy {
         .then((response) => {
           resolve(response.data)
         })
-        .catch(({response}) => {
+        .catch(({ response }) => {
           if (response) {
             reject(response.data)
           } else {
-            reject(new Error('Something went wrong...'))
+            reject(new Error('Something went wrong here.'))
           }
         })
     })

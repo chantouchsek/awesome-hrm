@@ -9,7 +9,7 @@
 </template>
 
 <script>
-  import { mapState } from 'vuex'
+  import {mapState} from 'vuex'
   import debounce from 'lodash.debounce'
   import cTable from '@/components/Table/Table'
 
@@ -120,6 +120,13 @@
      */
     components: {
       cTable
+    },
+    mounted () {
+      this.$store.watch((state) => {
+        if (state.auth.authenticated) {
+          this.$store.dispatch('user/all')
+        }
+      })
     }
   }
 </script>

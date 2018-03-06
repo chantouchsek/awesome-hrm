@@ -1,20 +1,19 @@
-/* ===============
-* Auth Transformer
-* ================
-*
-* The transformer for the authentication.
-*/
+/* ============
+ * Auth Transformer
+ * ============
+ *
+ * The transformer for the authentication.
+ */
 
-import BaseTransformer from './BaseTransformer'
+import Transformer from './BaseTransformer'
 import Auth from '@/models/Auth'
 
-class AuthTransformer extends BaseTransformer {
+class AuthTransformer extends Transformer {
   /**
    * Method used to transform the fetched authentication data.
    *
    * @returns {Auth} The auth model.
    */
-
   static fetch (auth) {
     return new Auth({
       tokenType: auth.token_type,
@@ -27,9 +26,8 @@ class AuthTransformer extends BaseTransformer {
   /**
    * Method used to transform the send authentication data.
    *
-   * @returns {Object} The transform authentication data.
+   * @returns {Object} The transformed authentication data.
    */
-
   static send (auth) {
     return {
       token_type: auth.tokenType,

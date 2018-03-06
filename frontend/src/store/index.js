@@ -14,6 +14,7 @@ import createLogger from 'vuex/dist/logger'
 import auth from './modules/auth'
 import permission from './modules/permission'
 import user from './modules/user'
+import artist from './modules/artist'
 import application from './modules/application'
 
 Vue.use(Vuex)
@@ -28,7 +29,8 @@ export default new Vuex.Store({
     auth,
     permission,
     user,
-    application
+    application,
+    artist
   },
 
   /**

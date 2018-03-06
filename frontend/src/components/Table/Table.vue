@@ -81,7 +81,7 @@
       return {
         fields: [
           {key: 'name'},
-          {key: 'registered'}
+          {key: 'created_at'}
         ],
         currentPage: 1,
         perPage: 5,
