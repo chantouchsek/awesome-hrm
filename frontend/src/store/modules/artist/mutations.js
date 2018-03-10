@@ -1,8 +1,8 @@
 /* ============
- * User Mutations
+ * Artist Mutations
  * ============
  *
- * The mutations available for the user module.
+ * The mutations available for the artist module.
  */
 
 import store from '@/store'
@@ -15,24 +15,24 @@ import {
 
 export default {
   /**
-   * Mutation to update the store with the fetched users.
+   * Mutation to update the store with the fetched artists.
    *
    * @param {Object} state      The current state of the store.
-   * @param {Array}  users    The fetched users.
+   * @param {Array}  artists    The fetched artists.
    * @param {Object} pagination The fetched pagination.
    */
-  [ALL] (state, { users, pagination }) {
-    state.all = users
+  [ALL] (state, { artists, pagination }) {
+    state.all = artists
     state.pagination = pagination
   },
 
   /**
-   * Mutation to respond to the action when an user has been created.
+   * Mutation to respond to the action when an artist has been created.
    *
    * @param {Object} state   The current state of the store.
-   * @param {Object} user  The user that has been created.
+   * @param {Object} artist  The artist that has been created.
    */
-  [CREATED] (state, user) {
+  [CREATED] (state, artist) {
     const {
       totalCount,
       limit
@@ -45,20 +45,20 @@ export default {
     }
 
     if (limit > state.all.length) {
-      state.all.push(user)
+      state.all.push(artist)
     }
   },
 
   /**
-   * Mutation to respond to the action when an user has been updated.
+   * Mutation to respond to the action when an artist has been updated.
    *
    * @param {Object} state  The current state of the store.
-   * @param {Object} user The user that has been updated.
+   * @param {Object} artist The artist that has been updated.
    */
-  [UPDATED] (state, user) {
+  [UPDATED] (state, artist) {
     state.all = state.all.map((item) => {
-      if (item.id === user.id) {
-        return user
+      if (item.id === artist.id) {
+        return artist
       }
 
       return item
@@ -66,7 +66,7 @@ export default {
   },
 
   /**
-   * Mutation to respond to the action when an user has been destroyed.
+   * Mutation to respond to the action when an artist has been destroyed.
    *
    * @param {Object} state The current state of the store.
    */
@@ -80,12 +80,12 @@ export default {
 
     let page = currentPage
 
-    // Check if the user is the last one on the page
+    // Check if the artist is the last one on the page
     if (totalPages === currentPage && currentPage !== 1 && totalCount % limit === 1) {
       page -= 1
     }
 
-    store.dispatch('user/all', (proxy) => {
+    store.dispatch('artist/all', (proxy) => {
       proxy.setParameter('page', page)
     })
   }

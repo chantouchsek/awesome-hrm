@@ -34,7 +34,7 @@
 </template>
 
 <script>
-  import { mapState } from 'vuex'
+  import {mapState} from 'vuex'
   import debounce from 'lodash.debounce'
   import cTable from '@/components/Table/Table'
 
@@ -160,10 +160,13 @@
     components: {
       cTable
     },
+<<<<<<< HEAD
 
     /**
      * This method will be fired once the application has been mounted.
      */
+=======
+>>>>>>> 2aa77cb60f8706e87a79a8bd5b55f64dae87a568
     mounted () {
       this.$store.watch((state) => {
         if (state.auth.authenticated) {

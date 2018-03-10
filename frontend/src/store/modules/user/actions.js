@@ -1,8 +1,8 @@
-/* ==============
-* User Actions
-* ===============
-*
-* The actions available for the user module
+/* ============
+ * User Actions
+ * ============
+ *
+ * The actions available for the user module.
  */
 
 import Vue from 'vue'
@@ -20,7 +20,7 @@ const proxy = new Proxy()
  * @param {function} commit Commit function to update the store.
  * @param {function} fn     Callback to edit the parameters on the proxy.
  */
-const all = ({commit}, fn = null) => {
+const all = ({ commit }, fn = null) => {
   if (typeof fn === 'function') {
     fn(proxy)
   }
@@ -42,7 +42,7 @@ const all = ({commit}, fn = null) => {
  * @param {function} commit  Commit function to update the store.
  * @param {Object}   user  The user that will be created.
  */
-const create = ({commit}, user) => {
+const create = ({ commit }, user) => {
   const transformedUser = UserTransformer.send(user)
 
   proxy.create(transformedUser)
@@ -70,7 +70,7 @@ const create = ({commit}, user) => {
  * @param {function} commit  Commit function to update the store.
  * @param {Object}   user  The user that has been created.
  */
-const created = ({commit}, user) => {
+const created = ({ commit }, user) => {
   commit(types.CREATED, UserTransformer.fetch(user))
 }
 
@@ -80,7 +80,7 @@ const created = ({commit}, user) => {
  * @param {function} commit  Commit function to update the store.
  * @param {Object}   user  The user that will be updated.
  */
-const update = ({commit}, user) => {
+const update = ({ commit }, user) => {
   const transformedUser = UserTransformer.send(user)
 
   proxy.update(user.id, transformedUser)
@@ -111,7 +111,7 @@ const update = ({commit}, user) => {
  * @param {function} commit  Commit function to update the store.
  * @param {Object}   user  The user that has been updated.
  */
-const updated = ({commit}, user) => {
+const updated = ({ commit }, user) => {
   commit(types.UPDATED, UserTransformer.fetch(user))
 }
 
@@ -121,7 +121,7 @@ const updated = ({commit}, user) => {
  * @param {function} commit    Commit function to update the store.
  * @param {Object}   userId  The user that will be destroyed.
  */
-const destroy = ({commit}, userId) => {
+const destroy = ({ commit }, userId) => {
   proxy.destroy(userId)
     .then(() => {
       store.dispatch('application/addAlert', {
@@ -147,7 +147,7 @@ const destroy = ({commit}, userId) => {
  * @param {function} commit  Commit function to update the store.
  * @param {Object}   user  The user that has been destroyed.
  */
-const destroyed = ({commit}, user) => {
+const destroyed = ({ commit }, user) => {
   commit(types.DESTROYED, UserTransformer.fetch(user))
 }
 

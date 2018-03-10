@@ -18,8 +18,12 @@ class UserTransformer extends Transformer {
     return new User({
       id: user.id,
       name: user.name,
+<<<<<<< HEAD
       email: user.email,
       registered: user.registered
+=======
+      created_at: user.registered_date
+>>>>>>> 2aa77cb60f8706e87a79a8bd5b55f64dae87a568
     })
   }
 
@@ -32,8 +36,12 @@ class UserTransformer extends Transformer {
     return {
       id: user.id,
       name: user.name,
+<<<<<<< HEAD
       email: user.email,
       registered: user.registered
+=======
+      created_at: user.registered_date
+>>>>>>> 2aa77cb60f8706e87a79a8bd5b55f64dae87a568
     }
   }
 }

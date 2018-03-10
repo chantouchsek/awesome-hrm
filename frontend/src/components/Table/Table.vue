@@ -92,7 +92,7 @@
       return {
         fields: [
           {key: 'name'},
-          {key: 'registered'}
+          {key: 'created_at'}
         ],
         currentPage: this.currentPageNow,
         limit: this.currentLimit,
