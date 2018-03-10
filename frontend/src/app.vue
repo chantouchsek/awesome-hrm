@@ -17,14 +17,7 @@
     /**
      * The router.
      */
-    router,
-    mounted () {
-      // this.$store.watch((state) => {
-      //   if (state.auth.authenticated) {
-      //     store.dispatch('user/all')
-      //   }
-      // })
-    }
+    router
   }
 </script>
 

@@ -2,7 +2,32 @@
   <div class="animated fadeIn">
     <b-row>
       <b-col lg="12">
-        <c-table fixed bordered caption="Bordered Table" :items="user.all" :add="redirectToCreatePage"/>
+        <b-card no-body>
+          <div slot="header">
+            <i class="fa fa-edit"></i> Users Table
+            <div class="card-actions">
+              <a href="#" class="btn btn-setting"><i class="icon-settings"></i></a>
+              <b-btn class="btn btn-minimize" v-b-toggle.collapse1><i class="icon-arrow-up"></i></b-btn>
+              <a href="#" class="btn btn-close"><i class="icon-close"></i></a>
+              <b-link href="#/setting/permissions/create"><i class="icon-close"></i></b-link>
+            </div>
+          </div>
+          <b-collapse id="collapse1" visible>
+            <b-card-body>
+              <b-table responsive="sm" :items="user.all" :fields="fields" :current-page="user.pagination.currentPage" :per-page="user.pagination.perPage">
+                <template slot="status" slot-scope="data">
+                  <b-badge :variant="getBadge(data.item.status)">{{data.item.status}}</b-badge>
+                </template>
+              </b-table>
+              <nav>
+                <b-pagination :total-rows="user.pagination.totalCount" :per-page="user.pagination.perPage" v-model="currentPage" prev-text="Prev" next-text="Next"></b-pagination>
+              </nav>
+              <nav>
+                <b-form-select v-model="limit" :options="pageNumbers" class="mb-3"></b-form-select>
+              </nav>
+            </b-card-body>
+          </b-collapse>
+        </b-card>
       </b-col><!--/.col-->
     </b-row><!--/.row-->
   </div>
@@ -25,11 +50,17 @@
      */
     data () {
       return {
+        fields: [
+          {key: 'name'},
+          {key: 'registered'}
+        ],
         query: null,
         pageNumbers: [
           5,
           10,
-          15
+          15,
+          25,
+          50
         ]
       }
     },
@@ -46,6 +77,14 @@
         },
         set (limit) {
           this.setLimit(limit)
+        }
+      },
+      currentPage: {
+        get () {
+          return this.user.pagination.currentPage
+        },
+        set (page) {
+          this.setPage(page)
         }
       }
     },
@@ -120,6 +159,17 @@
      */
     components: {
       cTable
+    },
+
+    /**
+     * This method will be fired once the application has been mounted.
+     */
+    mounted () {
+      this.$store.watch((state) => {
+        if (state.auth.authenticated) {
+          this.$store.dispatch('user/all')
+        }
+      })
     }
   }
 </script>

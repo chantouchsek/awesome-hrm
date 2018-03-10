@@ -18,7 +18,7 @@ class UserTransformer extends BaseTransformer
             'id' => (int)$item->id,
             'name' => (string)$item->name,
             'email' => (string)$item->email,
-            'registered_date' => $item->created_at->toDateString(),
+            'registered' => $item->created_at->toDateString(),
         ];
     }
 }

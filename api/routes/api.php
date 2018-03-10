@@ -17,8 +17,15 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::prefix('users')->as('users.')->group(function () { // ->namespace('Users')->middleware(['auth:api'])
-    Route::get('', 'UsersController@index')->name('index');
+Route::group([
+    'as'         => 'user.',
+    'prefix'     => 'users',
+], function () {
+    Route::get('', ['as' => 'index', 'uses' => 'UsersController@index']);
+    Route::post('', ['as' => 'store', 'uses' => 'UsersController@store']);
+    Route::get('{user}', ['as' => 'show', 'uses' => 'UsersController@show']);
+    Route::put('{user}', ['as' => 'update', 'uses' => 'UsersController@update']);
+    Route::delete('{user}', ['as' => 'destroy', 'uses' => 'UsersController@destroy']);
 });
 
 Route::prefix('permissions')->as('permissions.')->group(function () { // ->namespace('Users')->middleware(['auth:api'])

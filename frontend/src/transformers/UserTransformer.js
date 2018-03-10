@@ -17,7 +17,9 @@ class UserTransformer extends Transformer {
   static fetch (user) {
     return new User({
       id: user.id,
-      name: user.name
+      name: user.name,
+      email: user.email,
+      registered: user.registered
     })
   }
 
@@ -29,7 +31,9 @@ class UserTransformer extends Transformer {
   static send (user) {
     return {
       id: user.id,
-      name: user.name
+      name: user.name,
+      email: user.email,
+      registered: user.registered
     }
   }
 }

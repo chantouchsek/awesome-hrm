@@ -11,13 +11,16 @@
     </div>
     <b-collapse id="collapse1" visible>
       <b-card-body>
-        <b-table :hover="hover" :striped="striped" :bordered="bordered" :small="small" :fixed="fixed" responsive="sm" :items="items" :fields="fields" :current-page="currentPage" :per-page="perPage">
+        <b-table :hover="hover" :striped="striped" :bordered="bordered" :small="small" :fixed="fixed" responsive="sm" :items="items.all" :fields="fields" :current-page="items.pagination.currentPage" :per-page="items.pagination.perPage">
           <template slot="status" slot-scope="data">
             <b-badge :variant="getBadge(data.item.status)">{{data.item.status}}</b-badge>
           </template>
         </b-table>
         <nav>
-          <b-pagination :total-rows="getRowCount(items)" :per-page="perPage" v-model="currentPage" prev-text="Prev" next-text="Next" hide-goto-end-buttons> </b-pagination>
+          <b-pagination :total-rows="items.pagination.totalCount" :per-page="items.pagination.perPage" v-model="currentPage" prev-text="Prev" next-text="Next"></b-pagination>
+        </nav>
+        <nav>
+          <b-form-select v-model="limit" :options="pageNumbers" class="mb-3"></b-form-select>
         </nav>
       </b-card-body>
     </b-collapse>
@@ -69,12 +72,20 @@
         default: false
       },
       items: {
-        type: Array,
+        type: Object,
         default: []
       },
       add: {
         type: Function,
         default: false
+      },
+      currentPageNow: {
+        type: Number,
+        default: 1
+      },
+      currentLimit: {
+        type: Number,
+        default: 10
       }
     },
     data: () => {
@@ -83,9 +94,19 @@
           {key: 'name'},
           {key: 'registered'}
         ],
-        currentPage: 1,
+        currentPage: this.currentPageNow,
+        limit: this.currentLimit,
         perPage: 5,
-        totalRows: 0
+        totalRows: 0,
+        pageNumbers: [
+          5,
+          10,
+          15,
+          25,
+          50,
+          100,
+          150
+        ]
       }
     },
     methods: {
@@ -96,7 +117,7 @@
               : status === 'Banned' ? 'danger' : 'primary'
       },
       getRowCount (items) {
-        return items.length
+        return items
       }
     }
   }
