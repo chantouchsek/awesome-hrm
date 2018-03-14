@@ -9,22 +9,50 @@
               <a href="#" class="btn btn-setting"><i class="icon-settings"></i></a>
               <b-btn class="btn btn-minimize" v-b-toggle.collapse1><i class="icon-arrow-up"></i></b-btn>
               <a href="#" class="btn btn-close"><i class="icon-close"></i></a>
-              <b-link href="#/setting/permissions/create"><i class="icon-close"></i></b-link>
+              <b-link href="#/setting/users/create"><i class="icon-close"></i></b-link>
             </div>
           </div>
           <b-collapse id="collapse1" visible>
             <b-card-body>
-              <b-table responsive="sm" :items="user.all" :fields="fields" :current-page="user.pagination.currentPage" :per-page="user.pagination.perPage">
+              <b-table
+                show-empty
+                stacked="md"
+                responsive="sm"
+                :items="user.all"
+                :fields="fields"
+                :current-page="currentPage"
+                :per-page="user.pagination.perPage"
+                :sort-by.sync="sortBy"
+                :sort-desc.sync="sortDesc"
+                @filtered="onFiltered"
+              >
                 <template slot="status" slot-scope="data">
-                  <b-badge :variant="getBadge(data.item.status)">{{data.item.status}}</b-badge>
+                  <b-badge
+                    :variant="getBadge(row.item.status)">{{row.item.status}}
+                  </b-badge>
                 </template>
               </b-table>
-              <nav>
-                <b-pagination :total-rows="user.pagination.totalCount" :per-page="user.pagination.perPage" v-model="currentPage" prev-text="Prev" next-text="Next"></b-pagination>
-              </nav>
-              <nav>
-                <b-form-select v-model="limit" :options="pageNumbers" class="mb-3"></b-form-select>
-              </nav>
+              <b-row>
+                <b-col md="6" class="my-1">
+                  <b-pagination
+                    :total-rows="user.pagination.totalCount"
+                    :per-page="limit"
+                    v-model="currentPage"
+                    prev-text="Prev"
+                    next-text="Next"
+                    class="my-0"
+                  ></b-pagination>
+                </b-col>
+                <b-col md="6" class="my-1">
+                  <b-form-group horizontal label="Per page" class="mb-0">
+                    <b-form-select
+                      v-model="limit"
+                      :options="pageNumbers"
+                      class="mb-3"
+                    ></b-form-select>
+                  </b-form-group>
+                </b-col>
+              </b-row>
             </b-card-body>
           </b-collapse>
         </b-card>
@@ -34,7 +62,7 @@
 </template>
 
 <script>
-  import {mapState} from 'vuex'
+  import { mapState } from 'vuex'
   import debounce from 'lodash.debounce'
   import cTable from '@/components/Table/Table'
 
@@ -51,17 +79,20 @@
     data () {
       return {
         fields: [
-          {key: 'name'},
-          {key: 'registered'}
+          { key: 'name' },
+          { key: 'registered' }
         ],
         query: null,
         pageNumbers: [
           5,
           10,
-          15,
-          25,
-          50
-        ]
+          30,
+          50,
+          500
+        ],
+        sortBy: null,
+        sortDesc: false,
+        filter: null
       }
     },
     /**
@@ -92,6 +123,11 @@
      * The methods which the page can use.
      */
     methods: {
+      onFiltered (filteredItems) {
+        // Trigger pagination to update the number of buttons/pages due to filtering
+        // this.totalRows = filteredItems.length
+        this.currentPage = 1
+      },
       /**
        * Method used to get the user route.
        *
@@ -102,7 +138,7 @@
       getArtistRoute (id) {
         return {
           name: 'users.show',
-          params: {userId: id}
+          params: { userId: id }
         }
       },
       /**

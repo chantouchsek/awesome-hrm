@@ -23,7 +23,7 @@ abstract class Controller extends BaseController
      *
      * @var int The pagination size
      */
-    protected $maxLimit = 50;
+    protected $maxLimit = 500;
     /**
      * The minimum pagination size.
      *
