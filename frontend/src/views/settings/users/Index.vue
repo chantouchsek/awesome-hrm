@@ -8,12 +8,37 @@
             <div class="card-actions">
               <a href="#" class="btn btn-setting"><i class="icon-settings"></i></a>
               <b-btn class="btn btn-minimize" v-b-toggle.collapse1><i class="icon-arrow-up"></i></b-btn>
-              <a href="#" class="btn btn-close"><i class="icon-close"></i></a>
-              <b-link href="#/setting/users/create"><i class="icon-close"></i></b-link>
+              <a href="#" class="btn btn-close" @click="reload"><i class="icon-refresh"></i></a>
+              <b-link href="#/setting/users/create"><i class="icon-plus"></i></b-link>
             </div>
           </div>
           <b-collapse id="collapse1" visible>
             <b-card-body>
+              <b-row>
+                <b-col md="6" class="my-1">
+                  <b-form-group horizontal label="Filter" class="mb-0">
+                    <b-input-group>
+                      <b-form-input v-model="query" placeholder="Type to Search"/>
+                      <b-input-group-append>
+                        <b-btn :disabled="!query" @click="query = ''">Clear</b-btn>
+                      </b-input-group-append>
+                    </b-input-group>
+                  </b-form-group>
+                </b-col>
+                <b-col md="6" class="my-1">
+                  <b-form-group horizontal label="Sort" class="mb-0">
+                    <b-input-group>
+                      <b-form-select v-model="sortBy" :options="sortOptions">
+                        <option slot="first" :value="null">-- none --</option>
+                      </b-form-select>
+                      <b-form-select :disabled="!sortBy" v-model="sortDesc" slot="append">
+                        <option :value="false">Asc</option>
+                        <option :value="true">Desc</option>
+                      </b-form-select>
+                    </b-input-group>
+                  </b-form-group>
+                </b-col>
+              </b-row>
               <b-table
                 show-empty
                 stacked="md"
@@ -25,6 +50,8 @@
                 :sort-by.sync="sortBy"
                 :sort-desc.sync="sortDesc"
                 @filtered="onFiltered"
+                :filter="query"
+                busy
               >
                 <template slot="status" slot-scope="data">
                   <b-badge
@@ -62,7 +89,7 @@
 </template>
 
 <script>
-  import { mapState } from 'vuex'
+  import {mapState} from 'vuex'
   import debounce from 'lodash.debounce'
   import cTable from '@/components/Table/Table'
 
@@ -79,8 +106,8 @@
     data () {
       return {
         fields: [
-          { key: 'name' },
-          { key: 'registered' }
+          {key: 'name', label: 'Full Name', sortable: true},
+          {key: 'registered', label: 'Registered at', sortable: true}
         ],
         query: null,
         pageNumbers: [
@@ -91,8 +118,7 @@
           500
         ],
         sortBy: null,
-        sortDesc: false,
-        filter: null
+        sortDesc: false
       }
     },
     /**
@@ -117,6 +143,14 @@
         set (page) {
           this.setPage(page)
         }
+      },
+      sortOptions () {
+        // Create an options list from our fields
+        return this.fields
+          .filter(f => f.sortable)
+          .map(f => {
+            return {text: f.label, value: f.key}
+          })
       }
     },
     /**
@@ -126,7 +160,7 @@
       onFiltered (filteredItems) {
         // Trigger pagination to update the number of buttons/pages due to filtering
         // this.totalRows = filteredItems.length
-        this.currentPage = 1
+        this.currentPage = this.user.pagination.currentPage
       },
       /**
        * Method used to get the user route.
@@ -138,7 +172,7 @@
       getArtistRoute (id) {
         return {
           name: 'users.show',
-          params: { userId: id }
+          params: {userId: id}
         }
       },
       /**
@@ -180,13 +214,20 @@
           proxy.setParameter('q', query)
             .removeParameter('page')
         })
-      }, 500)
+      }, 500),
+      /**
+       * Reload the resource
+       */
+      reload () {
+        this.$store.dispatch('user/all')
+      }
     },
     /**
      * Available watchers for this page.
      */
     watch: {
       query (query) {
+        console.log(query)
         this.setQuery(query)
       }
     },

@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import store from '@/store'
 
 class BaseProxy {
   /**
@@ -88,7 +89,14 @@ class BaseProxy {
           if (response) {
             reject(response.data)
           } else {
-            reject(new Error('Something went wrong here.'))
+            reject(new Error('Something went wrong! Please check your connection.'))
+            store.dispatch('application/addAlert', {
+              type: 'danger',
+              message: 'Something went wrong! Please check your connection.',
+              dismissSecs: 10,
+              dismissCountDown: 10,
+              showDismissibleAlert: true
+            })
           }
         })
     })
