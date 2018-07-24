@@ -11,25 +11,6 @@ export default {
     },
     {
       title: true,
-      name: 'Settings',
-      class: '',
-      wrapper: {
-        element: '',
-        attributes: {}
-      }
-    },
-    {
-      name: 'Permissions',
-      url: '/setting/permissions',
-      icon: 'icon-wrench'
-    },
-    {
-      name: 'Users',
-      url: '/setting/users',
-      icon: 'icon-user'
-    },
-    {
-      title: true,
       name: 'Theme',
       class: '',
       wrapper: {
@@ -102,6 +83,11 @@ export default {
           icon: 'icon-puzzle'
         },
         {
+          name: 'Navbars',
+          url: '/base/navbars',
+          icon: 'icon-puzzle'
+        },
+        {
           name: 'Paginations',
           url: '/base/paginations',
           icon: 'icon-puzzle'
@@ -127,6 +113,11 @@ export default {
           icon: 'icon-puzzle'
         },
         {
+          name: 'Tabs',
+          url: '/base/tabs',
+          icon: 'icon-puzzle'
+        },
+        {
           name: 'Tooltips',
           url: '/base/tooltips',
           icon: 'icon-puzzle'
@@ -139,8 +130,13 @@ export default {
       icon: 'icon-cursor',
       children: [
         {
-          name: 'Standard Buttons',
+          name: 'Buttons',
           url: '/buttons/standard-buttons',
+          icon: 'icon-cursor'
+        },
+        {
+          name: 'Button Dropdowns',
+          url: '/buttons/dropdowns',
           icon: 'icon-cursor'
         },
         {
@@ -149,16 +145,16 @@ export default {
           icon: 'icon-cursor'
         },
         {
-          name: 'Dropdowns',
-          url: '/buttons/dropdowns',
-          icon: 'icon-cursor'
-        },
-        {
-          name: 'Social Buttons',
-          url: '/buttons/social-buttons',
+          name: 'Brand Buttons',
+          url: '/buttons/brand-buttons',
           icon: 'icon-cursor'
         }
       ]
+    },
+    {
+      name: 'Charts',
+      url: '/charts',
+      icon: 'icon-pie-chart'
     },
     {
       name: 'Icons',
@@ -166,13 +162,18 @@ export default {
       icon: 'icon-star',
       children: [
         {
-          name: 'Flags',
-          url: '/icons/flags',
+          name: 'CoreUI Icons',
+          url: '/icons/coreui-icons',
           icon: 'icon-star',
           badge: {
-            variant: 'success',
+            variant: 'info',
             text: 'NEW'
           }
+        },
+        {
+          name: 'Flags',
+          url: '/icons/flags',
+          icon: 'icon-star'
         },
         {
           name: 'Font Awesome',
@@ -189,11 +190,6 @@ export default {
           icon: 'icon-star'
         }
       ]
-    },
-    {
-      name: 'Charts',
-      url: '/charts',
-      icon: 'icon-pie-chart'
     },
     {
       name: 'Notifications',

@@ -4,9 +4,9 @@
  *
  * This will initialize the application.
  */
-import Vue from 'vue'
-import app from './app'
-/* eslint-disable no-new */
-require('./bootstrap')
+import Vue from 'vue';
+import app from './app';
 
-new Vue(app).$mount('#app')
+require('./bootstrap');
+
+new Vue(app).$mount('#app');

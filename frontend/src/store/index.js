@@ -6,31 +6,25 @@
  *
  * http://vuex.vuejs.org/en/index.html
  */
-import Vue from 'vue'
-import Vuex from 'vuex'
-import createLogger from 'vuex/dist/logger'
+import Vue from 'vue';
+import Vuex from 'vuex';
+import createLogger from 'vuex/dist/logger';
 
 // Modules
-import auth from './modules/auth'
-import permission from './modules/permission'
-import user from './modules/user'
-import artist from './modules/artist'
-import application from './modules/application'
+import application from './modules/application';
+import auth from './modules/auth';
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
-const debug = process.env.NODE_ENV !== 'production'
+const debug = process.env.NODE_ENV !== 'production';
 
 export default new Vuex.Store({
   /**
    * Assign the modules to the store.
    */
   modules: {
-    auth,
-    permission,
-    user,
     application,
-    artist
+    auth
   },
 
   /**
@@ -41,5 +35,5 @@ export default new Vuex.Store({
   /**
    * Plugins used in the store.
    */
-  plugins: debug ? [createLogger()] : []
-})
+  plugins: debug ? [createLogger()] : [],
+});

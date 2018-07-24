@@ -1,20 +1,7 @@
 <script>
 import { Line } from 'vue-chartjs'
-
-// const brandPrimary = '#20a8d8'
-const brandSuccess = '#4dbd74'
-const brandInfo = '#63c2de'
-const brandDanger = '#f86c6b'
-
-function convertHex (hex, opacity) {
-  hex = hex.replace('#', '')
-  const r = parseInt(hex.substring(0, 2), 16)
-  const g = parseInt(hex.substring(2, 4), 16)
-  const b = parseInt(hex.substring(4, 6), 16)
-
-  const result = 'rgba(' + r + ',' + g + ',' + b + ',' + opacity / 100 + ')'
-  return result
-}
+import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities'
+import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips'
 
 function random (min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min)
@@ -24,22 +11,26 @@ export default {
   extends: Line,
   props: ['height'],
   mounted () {
-    var elements = 27
-    var data1 = []
-    var data2 = []
-    var data3 = []
+    const brandSuccess = getStyle('--success') || '#4dbd74'
+    const brandInfo = getStyle('--info') || '#20a8d8'
+    const brandDanger = getStyle('--danger') || '#f86c6b'
 
-    for (var i = 0; i <= elements; i++) {
+    let elements = 27
+    const data1 = []
+    const data2 = []
+    const data3 = []
+
+    for (let i = 0; i <= elements; i++) {
       data1.push(random(50, 200))
       data2.push(random(80, 100))
       data3.push(65)
     }
     this.renderChart({
-      labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S', 'M', 'T', 'W', 'T', 'F', 'S', 'S', 'M', 'T', 'W', 'T', 'F', 'S', 'S', 'M', 'T', 'W', 'T', 'F', 'S', 'S'],
+      labels: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
       datasets: [
         {
           label: 'My First dataset',
-          backgroundColor: convertHex(brandInfo, 10),
+          backgroundColor: hexToRgba(brandInfo, 10),
           borderColor: brandInfo,
           pointHoverBackgroundColor: '#fff',
           borderWidth: 2,
@@ -64,6 +55,18 @@ export default {
         }
       ]
     }, {
+      tooltips: {
+        enabled: false,
+        custom: CustomTooltips,
+        intersect: true,
+        mode: 'index',
+        position: 'nearest',
+        callbacks: {
+          labelColor: function (tooltipItem, chart) {
+            return { backgroundColor: chart.data.datasets[tooltipItem.datasetIndex].borderColor }
+          }
+        }
+      },
       maintainAspectRatio: false,
       legend: {
         display: false

@@ -1,13 +1,12 @@
 <script>
 import { Line } from 'vue-chartjs'
-
-// const brandPrimary = '#20a8d8'
-// const brandSuccess = '#4dbd74'
-// const brandInfo = '#63c2de'
-// const brandWarning = '#f8cb00'
-// const brandDanger = '#f86c6b'
+import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips'
+import { getStyle } from '@coreui/coreui/dist/js/coreui-utilities'
 
 export default {
+  components: {
+    CustomTooltips
+  },
   extends: Line,
   props: ['data', 'height', 'width', 'variant'],
   mounted () {
@@ -16,12 +15,24 @@ export default {
       datasets: [
         {
           backgroundColor: 'transparent',
-          borderColor: this.variant ? this.variant : '#c2cfd6',
+          borderColor: this.getVariant(this.variant) || '#c2cfd6',
           data: this.data
         }
       ]
     }, {
       responsive: true,
+      tooltips: {
+        enabled: false,
+        custom: CustomTooltips,
+        intersect: true,
+        mode: 'index',
+        position: 'nearest',
+        callbacks: {
+          labelColor: function (tooltipItem, chart) {
+            return { backgroundColor: chart.data.datasets[tooltipItem.datasetIndex].borderColor }
+          }
+        }
+      },
       maintainAspectRatio: true,
       scales: {
         xAxes: [{
@@ -46,6 +57,11 @@ export default {
         display: false
       }
     })
+  },
+  methods: {
+    getVariant (val, el) {
+      return val[0] === '#' ? val : getStyle(`--${val}`, el)
+    }
   }
 }
 </script>

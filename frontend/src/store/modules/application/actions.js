@@ -4,7 +4,7 @@
  *
  * The actions available for the Application module.
  */
-import * as types from './mutation-types'
+import * as types from './mutation-types';
 
 /**
  * Action fired to toggle the drawer.
@@ -12,8 +12,8 @@ import * as types from './mutation-types'
  * @param {function} commit Commit function to update the store.
  */
 const toggleDrawer = ({ commit }) => {
-  commit(types.TOGGLE_DRAWER)
-}
+  commit(types.TOGGLE_DRAWER);
+};
 
 /**
  * Action fired to show the drawer.
@@ -21,8 +21,8 @@ const toggleDrawer = ({ commit }) => {
  * @param {function} commit Commit function to update the store.
  */
 const showDrawer = ({ commit }) => {
-  commit(types.SHOW_DRAWER)
-}
+  commit(types.SHOW_DRAWER);
+};
 
 /**
  * Action fired to hide the drawer.
@@ -30,8 +30,8 @@ const showDrawer = ({ commit }) => {
  * @param {function} commit Commit function to update the store.
  */
 const hideDrawer = ({ commit }) => {
-  commit(types.HIDE_DRAWER)
-}
+  commit(types.HIDE_DRAWER);
+};
 
 /**
  * Action fired to add a new alert.
@@ -40,8 +40,8 @@ const hideDrawer = ({ commit }) => {
  * @param {Object}   payload The payload.
  */
 const addAlert = ({ commit }, payload) => {
-  commit(types.ADD_ALERT, payload)
-}
+  commit(types.ADD_ALERT, payload);
+};
 
 /**
  * Action fired to remove an alert.
@@ -50,13 +50,13 @@ const addAlert = ({ commit }, payload) => {
  * @param {Object}   payload The payload.
  */
 const removeAlert = ({ commit }, payload) => {
-  commit(types.REMOVE_ALERT, payload)
-}
+  commit(types.REMOVE_ALERT, payload);
+};
 
 export default {
   toggleDrawer,
   showDrawer,
   hideDrawer,
   addAlert,
-  removeAlert
-}
+  removeAlert,
+};

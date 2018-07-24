@@ -6,8 +6,8 @@
         footer-tag="footer">
         <div slot="header">
           <i class="fa fa-align-justify"></i> <strong>Bootstrap Tooltips</strong><small><code>v-b-tooltip</code>directive</small>
-          <div class="card-actions">
-            <a href="https://bootstrap-vue.js.org/docs/components/tooltip" target="_blank">
+          <div class="card-header-actions">
+            <a href="https://bootstrap-vue.js.org/docs/components/tooltip" class="card-header-action" rel="noreferrer noopener" target="_blank">
               <small class="text-muted">docs</small>
             </a>
           </div>
@@ -117,32 +117,29 @@
 </template>
 
 <script>
-  export default {
-    name: 'tooltips',
-    data () {
-      return {
-        show: true,
-        disabled: false
-      }
+export default {
+  name: 'tooltips',
+  data () {
+    return {
+      show: true,
+      disabled: false
+    }
+  },
+  methods: {
+    onOpen () {
+      this.$refs.tooltip.$emit('open')
     },
-    methods: {
-      onOpen () {
-        this.$refs.tooltip.$emit('open')
-      },
-      onClose () {
-        this.$refs.tooltip.$emit('close')
-      },
-      disableByRef () {
-        if (this.disabled) {
-          this.$refs.tooltip2.$emit('enable')
-        } else {
-          this.$refs.tooltip2.$emit('disable')
-        }
+    onClose () {
+      this.$refs.tooltip.$emit('close')
+    },
+    disableByRef () {
+      if (this.disabled) {
+        this.$refs.tooltip2.$emit('enable')
+      } else {
+        this.$refs.tooltip2.$emit('disable')
       }
     }
   }
+}
 </script>
 
-<style scoped>
-
-</style>

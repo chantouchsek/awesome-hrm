@@ -1,9 +1,19 @@
 <script>
 import { Line } from 'vue-chartjs'
+import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips'
 
 export default {
   extends: Line,
-  props: ['data', 'height'],
+  props: {
+    data: {
+      type: Array,
+      default: () => [0, 22, 34, 46, 58, 70, 46]
+    },
+    height: {
+      type: String,
+      default: '100'
+    }
+  },
   mounted () {
     this.renderChart({
       labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
@@ -17,6 +27,10 @@ export default {
         }
       ]
     }, {
+      tooltips: {
+        enabled: false,
+        custom: CustomTooltips
+      },
       responsive: true,
       maintainAspectRatio: false,
       legend: {

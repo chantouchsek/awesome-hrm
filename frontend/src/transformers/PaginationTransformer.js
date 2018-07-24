@@ -5,8 +5,8 @@
  * The transformer for the pagination.
  */
 
-import Transformer from './BaseTransformer'
-import Pagination from '@/models/Pagination'
+import Transformer from './BaseTransformer';
+import Pagination from '@/models/Pagination';
 
 class PaginationTransformer extends Transformer {
   /**
@@ -16,13 +16,13 @@ class PaginationTransformer extends Transformer {
    *
    * @returns {Object} The transformed pagination.
    */
-  static fetch (pagination) {
+  static fetch(pagination) {
     return new Pagination({
       totalCount: pagination.total_count,
       totalPages: pagination.total_pages,
       currentPage: pagination.current_page,
-      limit: pagination.limit
-    })
+      limit: pagination.limit,
+    });
   }
 
   /**
@@ -32,14 +32,14 @@ class PaginationTransformer extends Transformer {
    *
    * @returns {Object} The transformed pagination.
    */
-  static send (pagination) {
+  static send(pagination) {
     return {
       total_count: pagination.totalCount,
       total_pages: pagination.totalPages,
       current_page: pagination.currentPage,
-      limit: pagination.limit
-    }
+      limit: pagination.limit,
+    };
   }
 }
 
-export default PaginationTransformer
+export default PaginationTransformer;

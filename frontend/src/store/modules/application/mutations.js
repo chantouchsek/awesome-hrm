@@ -10,8 +10,8 @@ import {
   REMOVE_ALERT,
   TOGGLE_DRAWER,
   SHOW_DRAWER,
-  HIDE_DRAWER
-} from './mutation-types'
+  HIDE_DRAWER,
+} from './mutation-types';
 
 export default {
   /**
@@ -19,8 +19,8 @@ export default {
    *
    * @param {Object} state The current state of the store.
    */
-  [TOGGLE_DRAWER] (state) {
-    state.drawerActive = !state.drawerActive
+  [TOGGLE_DRAWER](state) {
+    state.drawerActive = !state.drawerActive;
   },
 
   /**
@@ -28,8 +28,8 @@ export default {
    *
    * @param {Object} state The current state of the store.
    */
-  [SHOW_DRAWER] (state) {
-    state.drawerActive = true
+  [SHOW_DRAWER](state) {
+    state.drawerActive = true;
   },
 
   /**
@@ -37,8 +37,8 @@ export default {
    *
    * @param {Object} state The current state of the store.
    */
-  [HIDE_DRAWER] (state) {
-    state.drawerActive = false
+  [HIDE_DRAWER](state) {
+    state.drawerActive = false;
   },
 
   /**
@@ -47,9 +47,10 @@ export default {
    * @param {Object} state The current state of the store.
    * @param {Object} alert The newly added alert.
    */
-  [ADD_ALERT] (state, alert) {
-    state.alerts.push(alert)
+  [ADD_ALERT](state, alert) {
+    state.alerts.push(alert);
   },
+
 
   /**
    * Mutation which will remove a alert.
@@ -57,9 +58,9 @@ export default {
    * @param {Object} state The current state of the store.
    * @param {Object} alert The alert which will be removed.
    */
-  [REMOVE_ALERT] (state, alert) {
+  [REMOVE_ALERT](state, alert) {
     state.alerts = state
       .alerts
-      .filter(item => item !== alert)
-  }
-}
+      .filter(item => item !== alert);
+  },
+};

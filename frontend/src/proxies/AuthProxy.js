@@ -1,4 +1,4 @@
-import Proxy from './BaseProxy'
+import Proxy from './BaseProxy';
 
 class AuthProxy extends Proxy {
   /**
@@ -6,8 +6,8 @@ class AuthProxy extends Proxy {
    *
    * @param {Object} parameters The query parameters.
    */
-  constructor (parameters = {}) {
-    super('oauth', parameters)
+  constructor(parameters = {}) {
+    super('oauth', parameters);
   }
 
   /**
@@ -18,18 +18,18 @@ class AuthProxy extends Proxy {
    *
    * @returns {Promise} The result in a promise.
    */
-  login ({ username, password }) {
+  login({ username, password }) {
     const data = {
       username,
       password,
-      client_id: process.env.API_CLIENT_ID,
-      client_secret: process.env.API_CLIENT_SECRET,
+      client_id: process.env.VUE_APP_API_CLIENT_ID,
+      client_secret: process.env.VUE_APP_API_CLIENT_SECRET,
       grant_type: 'password',
-      scope: ''
-    }
+      scope: '',
+    };
 
-    return this.submit('post', `${this.endpoint}/token`, data)
+    return this.submit('post', `${this.endpoint}/token`, data);
   }
 }
 
-export default AuthProxy
+export default AuthProxy;

@@ -5,12 +5,12 @@
  * The mutations available for the artist module.
  */
 
-import Vue from 'vue'
+import Vue from 'vue';
 import {
   CHECK,
   LOGIN,
-  LOGOUT
-} from './mutation-types'
+  LOGOUT,
+} from './mutation-types';
 
 export default {
   /**
@@ -18,10 +18,10 @@ export default {
    *
    * @param {Object} state The current state of the store.
    */
-  [CHECK] (state) {
-    state.authenticated = !!localStorage.getItem('access_token')
+  [CHECK](state) {
+    state.authenticated = !!localStorage.getItem('access_token');
     if (state.authenticated) {
-      Vue.$http.defaults.headers.common.Authorization = `Bearer ${localStorage.getItem('access_token')}`
+      Vue.$http.defaults.headers.common.Authorization = `Bearer ${localStorage.getItem('access_token')}`;
     }
   },
 
@@ -31,10 +31,10 @@ export default {
    * @param {Object} state       The current state of the store.
    * @param {String} accessToken The access token.
    */
-  [LOGIN] (state, {accessToken}) {
-    state.authenticated = true
-    localStorage.setItem('access_token', accessToken)
-    Vue.$http.defaults.headers.common.Authorization = `Bearer ${accessToken}`
+  [LOGIN](state, { accessToken }) {
+    state.authenticated = true;
+    localStorage.setItem('access_token', accessToken);
+    Vue.$http.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
   },
 
   /**
@@ -42,9 +42,9 @@ export default {
    *
    * @param {Object} state The current state of the store.
    */
-  [LOGOUT] (state) {
-    state.authenticated = false
-    localStorage.removeItem('access_token')
-    Vue.$http.defaults.headers.common.Authorization = ''
-  }
-}
+  [LOGOUT](state) {
+    state.authenticated = false;
+    localStorage.removeItem('access_token');
+    Vue.$http.defaults.headers.common.Authorization = '';
+  },
+};

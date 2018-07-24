@@ -5,8 +5,8 @@
  * The transformer for the authentication.
  */
 
-import Transformer from './BaseTransformer'
-import Auth from '@/models/Auth'
+import Transformer from './BaseTransformer';
+import Auth from '@/models/Auth';
 
 class AuthTransformer extends Transformer {
   /**
@@ -14,13 +14,13 @@ class AuthTransformer extends Transformer {
    *
    * @returns {Auth} The auth model.
    */
-  static fetch (auth) {
+  static fetch(auth) {
     return new Auth({
       tokenType: auth.token_type,
       expiresIn: auth.expires_in,
       accessToken: auth.access_token,
-      refreshToken: auth.refresh_token
-    })
+      refreshToken: auth.refresh_token,
+    });
   }
 
   /**
@@ -28,14 +28,14 @@ class AuthTransformer extends Transformer {
    *
    * @returns {Object} The transformed authentication data.
    */
-  static send (auth) {
+  static send(auth) {
     return {
       token_type: auth.tokenType,
       expires_in: auth.expiresIn,
       access_token: auth.accessToken,
-      refresh_token: auth.refreshToken
-    }
+      refresh_token: auth.refreshToken,
+    };
   }
 }
 
-export default AuthTransformer
+export default AuthTransformer;

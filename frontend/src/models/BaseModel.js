@@ -11,11 +11,11 @@ class BaseModel {
    *
    * @param {Object} data The properties which are publicly accessible.
    */
-  constructor (data) {
+  constructor(data) {
     Object.keys(data).forEach((key) => {
-      this[key] = data[key]
-    })
+      this[key] = data[key];
+    });
   }
 }
 
-export default BaseModel
+export default BaseModel;

@@ -7,5 +7,5 @@
 
 export default {
   drawerActive: false,
-  alerts: []
-}
+  alerts: [],
+};

@@ -28,4 +28,15 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * Find the user identified by the given $identifier.
+     *
+     * @param $identifier email
+     * @return mixed
+     */
+    public function findForPassport($identifier)
+    {
+        return $this->where('email', $identifier)->first();
+    }
 }
